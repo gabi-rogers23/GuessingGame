@@ -1,1 +1,23 @@
 /* Write your CSS code in this file */
+body {
+    background-color: black;
+}
+
+#mainDiv {
+    background-image: url("Images/backgroundImage.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 800px;
+    color: white;
+    display: flex;
+}
+
+#suitcase {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 400px;
+    border: 1px solid red;
+}
