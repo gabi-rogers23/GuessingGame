@@ -15,32 +15,23 @@ body {
 
 #mainDiv {
     /* position: absolute; */
-    height: 1090px;
+    height: 600px;
     width: 1090px;
+    padding-top: 25px;
     background-image: url(Images/backgroundImage.png);
     background-repeat: no-repeat;
     background-size: 1090px;
-    border: 1px solid red;
     margin: auto;
 }
 
-/* #imageDiv {
-    margin: 0 auto;
-    margin-top: 25px;
-    } */
-
-/* #backgroundImage {
-    width: 1090px;
-} */
 
 #title {
     width: 500px;
     text-align: center;
     font-family: Bodoni Moda;
     color: white;
-    background-color: black;
     position: relative;
-    top: 10%;
+    top: 12%;
     margin: auto;
 }
 
@@ -59,7 +50,6 @@ h2{
      color: white;
      text-align: center;
      padding: 3px;
-
 }
 
 #hint {
@@ -69,11 +59,76 @@ h2{
     height: 100px;
     width: 100px;
     font-family: Covered By Your Grace;
-    border: 1px solid red;
+    position: relative;
+    top: 90px;
+    left: 960px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#guess {
+#hint:hover {
+    scale: 110%;
 }
 
 #playerInputMain {
+    position: relative;
+    top: 100px;
+    width: 1090px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#hintText {
+    text-align: center;
+    font-size: larger;
+    color: white;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px black;
+}
+
+#guess {
+    position: relative;
+    height: 240px;
+    width: 200px;
+    top: 100px;
+    left: 90px;
+    background-image: url(Images/guessesPaper.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#guessList {
+    list-style: none;
+    font-family: Reenie Beanie;
+    font-weight: 800;
+    font-size: 30px;
+    color: darkslategrey;
+}
+
+#openHint {
+    background-image: url(Images/openPaper.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 800px;
+    bottom: 90px;
+    height: 200px;
+    width: 300px;
+    font-family: Covered By Your Grace;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+#hintsList {
+    list-style: none;
 }
