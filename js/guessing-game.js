@@ -3,41 +3,115 @@
 Write your guess-game code here! Don't forget to look at the test specs as a guide. You can run the specs
 by running "npm test".
 
-In this file, you will also include the event listeners that are needed to interact with your HTML file when
-a user clicks a button or adds a guess to the input field.
-
 */
+function createWinningNum() {
+   return 12 // Math.floor(Math.random() * 100);
+}
 
-let winningNumber = 12; //Math.floor(Math.random() * 100);
+let winningNumber = createWinningNum();
 let guessArray = [];
 
 
-function addGuess() {
+function validateInput(input) {
+    if (guessArray.length >= 5) {
+        return false;
+    }
+
+    if (input === NaN) {
+        return false;
+    }
+
+    if (input < 1 || input > 100) {
+        return false;
+    }
+
+    if (guessArray.includes(input)) {
+        return false;
+    }
+
+    return true;
+}
+
+
+function addGuess(playerInput) {
 
     let guessList = document.getElementById('guessList');
-
-    let playerInput = document.getElementById('playerInputArea').value;
 
     let guess = document.createElement('li');
     guess.appendChild(document.createTextNode(playerInput));
 
     guessList.appendChild(guess);
 
-    guessArray.push(guess);
-
-    userWin(playerInput);
+    guessArray.push(playerInput);
 }
 
-function userWin(playerInput) {
+function endGame(status) {
+    document.getElementById('playerStatus').innerText = status;
 
- if (playerInput == winningNumber) {
-    alert('You Escaped!');
- }
+    document.getElementById('playerInputButton').disabled = true;
+
+    document.getElementById('reset').style.visibility = "visible";
+}
+
+function tempCheck(playerInput) {
+    let diff = Math.abs(winningNumber - playerInput);
+    let temp = "";
+    let guessElevation = "";
+
+    if (diff <= 5) {
+        temp = "You're hot!";
+    } else if (diff <= 10) {
+        temp = "You're warm...";
+    } else {
+        temp = "#$%*! You're cold!";
+    }
+
+    if (winningNumber < playerInput) {
+        guessElevation = "Guess Lower!"
+    }else{
+        guessElevation = "Guess Higher!"
+    }
+
+    document.getElementById('playerStatus').innerText = temp + " " + guessElevation;
+}
+
+function reset() {
+    guessArray = [];
+    winningNumber = createWinningNum();
+    document.getElementById('reset').style.visibility = "hidden";
+    document.getElementById('playerInputButton').disabled = false;
+    document.getElementById('playerInputArea').value = "";
+    document.getElementById('playerStatus').innerText = "";
+    document.getElementById('guessList').innerHTML = "";
+}
+
+function guessClick() {
+
+    let playerInput = document.getElementById('playerInputArea').value;
+
+    if (!validateInput(playerInput)) {
+        document.getElementById('playerStatus').innerText = "Invalid Input.  Try again.";
+        return;
+    } else {
+        addGuess(playerInput);
+        document.getElementById('playerInputArea').value = "";
+    }
+
+    if (playerInput == winningNumber) {
+        endGame("CONGRATULATIONS!!! You've escaped!");
+    } else if (guessArray.length === 5) {
+        endGame("You're trapped forever!!!")
+    } else {
+        tempCheck(playerInput);
+    }
 
 }
 
 let guessButton = document.getElementById('playerInputButton');
-guessButton.addEventListener('click', addGuess);
+guessButton.addEventListener('click', guessClick);
+
+document.getElementById('reset').addEventListener('click', reset);
+
 
 //enter a number in the field
 //validate input
