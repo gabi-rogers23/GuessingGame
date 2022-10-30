@@ -4,13 +4,13 @@ Write your guess-game code here! Don't forget to look at the test specs as a gui
 by running "npm test".
 
 */
-function createWinningNum() {
-   return 12 // Math.floor(Math.random() * 100);
+function createRandomNum() {
+  return Math.floor(Math.random() * 100) + 1;
 }
 
-let winningNumber = createWinningNum();
+let winningNumber = createRandomNum();
 let guessArray = [];
-
+let hintArray = [];
 
 function validateInput(input) {
     if (guessArray.length >= 5) {
@@ -59,9 +59,9 @@ function tempCheck(playerInput) {
     let guessElevation = "";
 
     if (diff <= 5) {
-        temp = "You're hot!";
+        temp = "Oh #&^%! You're hot!";
     } else if (diff <= 10) {
-        temp = "You're warm...";
+        temp = "You're getting warm...";
     } else {
         temp = "#$%*! You're cold!";
     }
@@ -75,14 +75,68 @@ function tempCheck(playerInput) {
     document.getElementById('playerStatus').innerText = temp + " " + guessElevation;
 }
 
+function getHintArray() {
+
+    let hint1 = createRandomNum();
+    let hint2 = createRandomNum();
+
+    if (hint1 === hint2) {
+       return getHintArray()
+    } else if (hint1 === winningNumber || hint2 === winningNumber) {
+        return getHintArray()
+    }else{
+        hintArray.push(hint1);
+        hintArray.push(hint2);
+        let insertPoint = Math.floor(Math.random() * 3);
+
+        if (insertPoint === 2) {
+            hintArray.push(winningNumber)
+        } else {
+        hintArray.splice(insertPoint, 0, winningNumber);
+        }
+
+        return hintArray;
+    }
+}
+
+function hintList(hintArray) {
+
+    let hintList = document.getElementById('hintsList');
+    
+
+    for (let hint of hintArray) {
+        let hintItem = document.createElement('li');
+        hintItem.appendChild(document.createTextNode(hint));
+        hintList.appendChild(hintItem);
+    }
+}
+
+function hintClick(){
+    document.getElementById('hint').style.visibility = "hidden";
+    document.getElementById('openHint').style.visibility = "visible";
+    if (hintArray.length === 0) {
+        hintList(getHintArray());
+    }
+    
+}
+
+function openHintClick() {
+    document.getElementById('hint').style.visibility = "visible";
+    document.getElementById('openHint').style.visibility = "hidden";
+}
+
+
 function reset() {
     guessArray = [];
-    winningNumber = createWinningNum();
+    hintArray = []; 
+    winningNumber = createRandomNum();
     document.getElementById('reset').style.visibility = "hidden";
     document.getElementById('playerInputButton').disabled = false;
     document.getElementById('playerInputArea').value = "";
     document.getElementById('playerStatus').innerText = "";
     document.getElementById('guessList').innerHTML = "";
+    document.getElementById('hintsList').innerHTML = "";
+    openHintClick()
 }
 
 function guessClick() {
@@ -90,7 +144,7 @@ function guessClick() {
     let playerInput = document.getElementById('playerInputArea').value;
 
     if (!validateInput(playerInput)) {
-        document.getElementById('playerStatus').innerText = "Invalid Input.  Try again.";
+        document.getElementById('playerStatus').innerText = "Invalid Input. Try again.";
         return;
     } else {
         addGuess(playerInput);
@@ -107,8 +161,12 @@ function guessClick() {
 
 }
 
-let guessButton = document.getElementById('playerInputButton');
-guessButton.addEventListener('click', guessClick);
+
+document.getElementById('playerInputButton').addEventListener('click', guessClick);
+
+document.getElementById('hint').addEventListener('click', hintClick);
+
+document.getElementById('openHint').addEventListener('click', openHintClick);
 
 document.getElementById('reset').addEventListener('click', reset);
 

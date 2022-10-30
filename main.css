@@ -44,29 +44,41 @@ h2{
     font-family: Julius Sans One;
 }
 
-#playerInput {
-     width: 200px;
-     color: white;
-     text-align: center;
-     padding: 3px;
-}
 
 #playerInputMain {
     position: relative;
+    width: 150px;
     top: 100px;
     margin: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    font-family: Julius Sans One;
+   
+}
+
+#playerInputArea {
+    width: 150px;
+    text-align: center;
+    padding: 3px;
+}
+
+#playerInputButton {
+    background-color: rgb(169, 48, 48);
+    color: white;
+    margin-top: 8px;
+    padding: 4px;
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#playerInputButton:hover {
+    background: linear-gradient(#408c99, #599bb3);
 }
 
 #guess {
     position: relative;
     height: 240px;
     width: 200px;
-    /* top: 100px; */
     left: 90px;
+    bottom: 50px;
     background-image: url(Images/guessesPaper.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -80,8 +92,7 @@ h2{
     list-style: none;
     font-family: Reenie Beanie;
     font-weight: 800;
-    font-size: 30px;
-    color: darkslategrey;
+    font-size: xx-large;
 }
 
 #statusContainer {
@@ -122,6 +133,7 @@ h2{
     display: flex;
     align-items: center;
     justify-content: center;
+    bottom: 25px;
 }
 
 #hint:hover {
@@ -142,7 +154,7 @@ h2{
     background-repeat: no-repeat;
     position: relative;
     left: 800px;
-    bottom: 190px;
+    bottom: 250px;
     height: 200px;
     width: 300px;
     font-family: Covered By Your Grace;
@@ -153,7 +165,12 @@ h2{
     visibility: hidden;
 }
 
+#openHint:hover {
+    scale: 110%;
+}
+
 #hintsList {
     list-style: none;
+    font-size: x-large;
 }
 
