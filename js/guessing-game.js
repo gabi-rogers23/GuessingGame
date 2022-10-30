@@ -152,7 +152,7 @@ function guessClick() {
     }
 
     if (playerInput == winningNumber) {
-        endGame("CONGRATULATIONS!!! You've escaped!");
+        endGame("CONGRATULATIONS!!! You've escaped!!!");
     } else if (guessArray.length === 5) {
         endGame("You're trapped forever!!!")
     } else {
@@ -171,15 +171,5 @@ document.getElementById('openHint').addEventListener('click', openHintClick);
 document.getElementById('reset').addEventListener('click', reset);
 
 
-//enter a number in the field
-//validate input
-//check if it is NAN or <1 or >100
 
-//compare guess inputs to the winning number
-//put guesses into the previous guesses
-//loose after 5 guesses
-//win if random winning number = guess number
-
-//hint click causes the paper to open and show three numbers
-//one random winning number and two random numbers
 
